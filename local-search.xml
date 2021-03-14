@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>Docker的使用</title>
+    <link href="/2021/03/14/Docker%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <url>/2021/03/14/Docker%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Docker使用"><a href="#Docker使用" class="headerlink" title="Docker使用"></a>Docker使用</h1><h2 id="Docker介绍"><a href="#Docker介绍" class="headerlink" title="Docker介绍"></a>Docker介绍</h2><p>Docker 是一个用于开发，交付和运行应用程序的开放平台。Docker 使您能够将应用程序与基础架构分开，从而可以快速交付软件。借助 Docker，您可以与管理应用程序相同的方式来管理基础架构。通过利用 Docker 的方法来快速交付，测试和部署代码，您可以大大减少编写代码和在生产环境中运行代码之间的延迟。</p><p>Docker类似于虚拟机但是虚拟机是直接分配硬件资源在分配过去的硬件资源上建立一个完整的系统你再在这个系统上进行操作，而Docker是建立在系统层上方开辟一片空白的环境空间将各种资源分配给这个容器，由于他可以随意的将各种环境镜像pull下来，也可以将本地容器打包成镜像上传，相当于你不仅可以git push，将自己的源码上传还可以顺带将环境打包上去，省略了配置环境的步骤这是他的巨大优势。</p><p>但是他也有缺点比如说我运行了两个docker容器，两个容器要实现通信，就不能简单的按照正常方式来进行进行交流，需要在Docker层面上配置端口号实现不同容器间的通信</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title></title>
     <link href="/2021/03/14/Docker%E4%BD%BF%E7%94%A8/"/>
     <url>/2021/03/14/Docker%E4%BD%BF%E7%94%A8/</url>
