@@ -20,7 +20,7 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-  <title>WINDOWS配置Paddle环境 - Hexo</title>
+  <title>Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -165,7 +165,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="WINDOWS配置Paddle环境">
+            <span class="h2" id="subtitle" title="">
               
             </span>
 
@@ -175,8 +175,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-09 12:57" pubdate>
-        2021年3月9日 下午
+      <time datetime="2021-03-14 22:50" pubdate>
+        2021年3月14日 晚上
       </time>
     </span>
   
@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      528 字
+      362 字
     </span>
   
 
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      3
        分钟
     </span>
   
@@ -227,62 +227,12 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">WINDOWS配置Paddle环境</h1>
+            <h1 style="display: none"></h1>
             
             <div class="markdown-body">
-              <h1 id="WINDOWS环境使用PIP安装PaddlePaddle"><a href="#WINDOWS环境使用PIP安装PaddlePaddle" class="headerlink" title="WINDOWS环境使用PIP安装PaddlePaddle"></a>WINDOWS环境使用PIP安装PaddlePaddle</h1><h2 id="注：所有安装路径都建议默认路径最好路径中无中文"><a href="#注：所有安装路径都建议默认路径最好路径中无中文" class="headerlink" title="注：所有安装路径都建议默认路径最好路径中无中文"></a>注：所有安装路径都建议默认路径最好路径中无中文</h2><h3 id="1-安装python"><a href="#1-安装python" class="headerlink" title="1.安装python"></a>1.安装python</h3><p>我一开始安装的是python3.8后来在使用安装paddlepaddle的指令时会报错，图如下</p>
-<p><img src="https://i.loli.net/2021/03/09/W7PJhxLr1URNSEI.png" srcset="/img/loading.gif" alt="avatar"></p>
-<p>问了百度那边的人告诉我切换环境为3.7这里就改为安装python3.7了</p>
-<p>下载地址</p>
-<p><a target="_blank" rel="noopener" href="https://www.python.org/downloads/release/python-378/">https://www.python.org/downloads/release/python-378/</a></p>
-<p><img src="https://i.loli.net/2021/03/09/qPMgZSUkj7if9VW.png" srcset="/img/loading.gif" alt="1_2"></p>
-<p>选择executable installer</p>
-<p>然后选择安装勾选add path然后install now</p>
-<p>接下来更新库管理器pip（因为python安装默认是有pip的所以不用单独安装）</p>
-<p>进入命令提示符输入</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">python -m pip install <span class="hljs-comment">--upgrade pip</span><br></code></pre></td></tr></table></figure>
-
-<p>出现如图的successfully install pip<img src="https://i.loli.net/2021/03/09/98mFLCUZDt7SBuG.png" srcset="/img/loading.gif" alt="1_3"></p>
-<p>表示安装完成</p>
-<h3 id="2-安装CUDA，CUDNN"><a href="#2-安装CUDA，CUDNN" class="headerlink" title="2.安装CUDA，CUDNN"></a>2.安装CUDA，CUDNN</h3><h4 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h4><p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/zh-cn/cuda-downloads">https://developer.nvidia.com/zh-cn/cuda-downloads</a></p>
-<p><img src="https://i.loli.net/2021/03/09/AXGmSlCch2yokMV.png" srcset="/img/loading.gif" alt="1_4"></p>
-<p>选择本地安装</p>
-<p>尝试切换网络环境挂梯子等方法还是无法下载然后找到个百度网板里头有CUDA11</p>
-<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1IV_lBCeFFM712xx_iXnhqQ#list/path=%2F">https://pan.baidu.com/s/1IV_lBCeFFM712xx_iXnhqQ#list/path=%2F</a></p>
-<p>提取码：0pr5</p>
-<p>下载完成后将压缩文件解压里面是安装要用到的动态库然后双击exe文件进行安装一路默认安装就行</p>
-<p>Cudnn安装在验证安装的时候提示我CUDNN版本问题要求10.0版本</p>
-<p><img src="https://i.loli.net/2021/03/09/t2WoKA49iEsPyIl.png" srcset="/img/loading.gif" alt="1_5"></p>
-<p><a target="_blank" rel="noopener" href="https://developer.nvidia.com/cudnn">https://developer.nvidia.com/cudnn</a></p>
-<p>点击下载cudnn访问后可能会有注册啥的按步骤注册完成</p>
-<p>勾选I agree</p>
-<p><img src="https://i.loli.net/2021/03/09/dXZ8wrlqg47Ch93.png" srcset="/img/loading.gif" alt="1_6"></p>
-<p>选择Archived cuDNN Releases</p>
-<p><img src="https://i.loli.net/2021/03/09/MD6YQdvEOU38Guh.png" srcset="/img/loading.gif" alt="1_7"></p>
-<p>选择如图所示下载for windows下载（我挂了梯子才下下来）</p>
-<p>然后将文件解压将解压文件夹中的cuda/bin目录下的dll文件复制黏贴到</p>
-<p>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\bin这个路径下（CUDA安装目录）</p>
-<h3 id="3-安装paddlepaddle"><a href="#3-安装paddlepaddle" class="headerlink" title="3.安装paddlepaddle"></a>3.安装paddlepaddle</h3><p>打开cmd输入</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">python3</span> -m pip install paddlepaddle-gpu==<span class="hljs-number">2</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.post<span class="hljs-number">110</span> -f https://paddlepaddle.org.cn/whl/stable.html<br></code></pre></td></tr></table></figure>
-
-<p>出现</p>
-<p><img src="https://i.loli.net/2021/03/09/Yf4AFzMCjyUovl3.png" srcset="/img/loading.gif" alt="1_8"></p>
-<p>表示安装成功</p>
-<p>接下来验证安装</p>
-<p>在cmd中输入python进入释义器</p>
-<p>输入</p>
-<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-keyword">import</span> paddle<br></code></pre></td></tr></table></figure>
-
-<p>再输入</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">paddle<span class="hljs-selector-class">.utils</span><span class="hljs-selector-class">.run_check</span>()<br></code></pre></td></tr></table></figure>
-
-<p>出现PaddlePaddle is installed successfully !</p>
-<p><img src="https://i.loli.net/2021/03/09/vpn43BN8OULoSt7.png" srcset="/img/loading.gif" alt="1_9"></p>
-<p>表示安装完成</p>
-<p>参考文档：</p>
-<p><a target="_blank" rel="noopener" href="https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html">https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/2.0/install/pip/windows-pip.html">https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/2.0/install/pip/windows-pip.html</a></p>
+              <h1 id="Docker使用"><a href="#Docker使用" class="headerlink" title="Docker使用"></a>Docker使用</h1><h2 id="Docker介绍"><a href="#Docker介绍" class="headerlink" title="Docker介绍"></a>Docker介绍</h2><p>Docker 是一个用于开发，交付和运行应用程序的开放平台。Docker 使您能够将应用程序与基础架构分开，从而可以快速交付软件。借助 Docker，您可以与管理应用程序相同的方式来管理基础架构。通过利用 Docker 的方法来快速交付，测试和部署代码，您可以大大减少编写代码和在生产环境中运行代码之间的延迟。</p>
+<p>Docker类似于虚拟机但是虚拟机是直接分配硬件资源在分配过去的硬件资源上建立一个完整的系统你再在这个系统上进行操作，而Docker是建立在系统层上方开辟一片空白的环境空间将各种资源分配给这个容器，由于他可以随意的将各种环境镜像pull下来，也可以将本地容器打包成镜像上传，相当于你不仅可以git push，将自己的源码上传还可以顺带将环境打包上去，省略了配置环境的步骤这是他的巨大优势。</p>
+<p>但是他也有缺点比如说我运行了两个docker容器，两个容器要实现通信，就不能简单的按照正常方式来进行进行交流，需要在Docker层面上配置端口号实现不同容器间的通信</p>
 
             </div>
             <hr>
@@ -303,18 +253,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/14/Docker%E4%BD%BF%E7%94%A8/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/08/PaddleOCR%E8%B8%A9%E5%9D%91/">
-                        <span class="hidden-mobile">PaddleOCR踩坑</span>
+                      <a href="/2021/03/09/WINDOWS%E9%85%8D%E7%BD%AEPaddle%E7%8E%AF%E5%A2%83/">
+                        <span class="hidden-mobile">WINDOWS配置Paddle环境</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
