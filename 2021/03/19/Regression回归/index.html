@@ -1,0 +1,486 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="">
+  
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+  <title>Regression回归 - 巡山徐的Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>首页</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Regression回归">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-19 10:53" pubdate>
+        2021年3月19日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Regression回归</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Regression-回归"><a href="#Regression-回归" class="headerlink" title="Regression 回归"></a>Regression 回归</h1><p>本Blog基于台湾大学李宏毅教授的课程</p>
+<h2 id="一、Regression可以做什么"><a href="#一、Regression可以做什么" class="headerlink" title="一、Regression可以做什么"></a>一、Regression可以做什么</h2><ul>
+<li><p>股票预测系统（输入过去的股票变动数据输出未来预测）</p>
+</li>
+<li><p>自动驾驶汽车（输入各种传感器数据输出方向盘变动角度）</p>
+</li>
+<li><p>推荐系统（输入浏览历史输出符合用户需求的物品）</p>
+</li>
+</ul>
+<h2 id="二、Regression实例：宝可梦CP值预测"><a href="#二、Regression实例：宝可梦CP值预测" class="headerlink" title="二、Regression实例：宝可梦CP值预测"></a>二、Regression实例：宝可梦CP值预测</h2><h3 id="1-目标"><a href="#1-目标" class="headerlink" title="1.目标"></a>1.目标</h3><p>选择出适合进化的宝可梦，CP值指的是一个宝可梦的战斗力，在这个实例中输入为某一只宝可梦在进化前的CP值，输出为这只宝可梦进化之后的CP值。X表示输入，Y表式输出。</p>
+<h3 id="2-寻找合适的Function-set（寻找模型）"><a href="#2-寻找合适的Function-set（寻找模型）" class="headerlink" title="2.寻找合适的Function set（寻找模型）"></a>2.寻找合适的Function set（寻找模型）</h3><p>y=b+w*xcp(w,b为任意参数)</p>
+<p>因为b和w为任意值，所以这个model是一个无穷尽的一堆Function的集合，将此式转化为如图所示的样子：</p>
+<p><img src="https://i.loli.net/2021/03/19/KQFV2Gw7PBvo6qA.png" srcset="/img/loading.gif" alt="image-20210319195746244"></p>
+<p>这个Xi指的是此题中的Feature,什么意思就是指会对结果产生影响的样本的特征，拿宝可梦CP预测这个来说，可能宝可梦的身高体重或者种族，都会对他进化过后的CP值产生影响，这些都叫做特征。Wi叫做weight就是这个Feature对结果产生影响的大小，Wi绝对值越大说明对应的Xi越是重要的Feature。</p>
+<h3 id="3、判断Function的好坏"><a href="#3、判断Function的好坏" class="headerlink" title="3、判断Function的好坏"></a>3、判断Function的好坏</h3><p><img src="https://i.loli.net/2021/03/19/wq3FpLAiUtW4IZC.png" srcset="/img/loading.gif" alt="image-20210319201011575"></p>
+<p>将收集来的10个宝可梦的数据画成表格一个点代表一个宝可梦进化前后的CP值。</p>
+<p>有了data我们就能够判断一个Function的好坏，我们再定义一个Loss Function（损失函数）这个Loss的输入就是一个Function输出就是这个Function有多不好坏，我们衡量Function的好坏实质上就是衡量两个参数w和b的好坏。</p>
+<p><img src="https://i.loli.net/2021/03/19/7TMKPpXAioGWecY.png" srcset="/img/loading.gif" alt="image-20210319202005898"></p>
+<p>光看这个式子可能没有一个很直观的知道这个方差如何判断好坏，但是我们将这个式子几何表示画出来，会发现他是我们Data的点到我们Function这个线垂直方向的距离的平方，这个距离和越小说明Function总体上越靠近各个Data的点。</p>
+<p>定完了Loss我们接下来要挑选最好的Function写作f<em>，也就是寻找最好的w和b写作w</em>和b*。我们引入Gradient Descent（梯度下降）的方法。我们现在的需求就变成了找w和b使得Loss最小。我们随便找一条线作为例子</p>
+<p><img src="https://i.loli.net/2021/03/19/ZbPkg4TVt8CWmcG.png" srcset="/img/loading.gif" alt="image-20210319203532530"></p>
+<p> 我们对L求w的倒数，几何上就是求W0这个点切线的斜率，这个斜率的正负可以表示我这个点的趋势如果为正说明他在上升，我们要往回走一步，如果为负我们往回走一步，这个走一步该走多大取决于我们事前定好的一个值Learing rate（学习率）这个值大我们跨步就大学习速度就快，但是存在跨过头和来回跨步的情况。所以不是越大越好，然后我们这一步移动完了得到了w1，重复上面求导的操作得出w2，如此往复我们就能够的到导数最接近于0的点也就是wt（Local minima）但是我们发现实际上有比这个wt更低的点但是由于算法限制我们取不到那个Global minima。</p>
+<p><img src="https://i.loli.net/2021/03/19/aFIXVjekv6bLtdJ.png" srcset="/img/loading.gif" alt="image-20210319204303830"></p>
+<p>但是我们宝可梦的这道题，他含有两个参数，实际上是一模一样的。我们求微分变成了求参数的偏微分如图所示参数更多的情况下也是如此：</p>
+<p><img src="https://i.loli.net/2021/03/19/UBrVkoOlhbj6GQq.png" srcset="/img/loading.gif" alt="image-20210319204551813"></p>
+<p>我们将这个过程可视化一下</p>
+<p><img src="https://i.loli.net/2021/03/19/eq9GMICgOtBEnJb.png" srcset="/img/loading.gif" alt="image-20210319204658500"></p>
+<p>可以看到每次变动都是走的点的法线方向逐渐从红色（Loss大的地方）往蓝色（Loss小的地方）移动但是如果你今天的图像长这个样子</p>
+<p><img src="https://i.loli.net/2021/03/19/yZTJFdQPpYV7MAN.png" srcset="/img/loading.gif" alt="image-20210319205530112"></p>
+<p>就是要给大麻烦，他最好的结果取决于你初始的点是比较看人品的，但是在Liner regression这个问题中他是没有Local minima。</p>
+<p>回到题目我们实际来算一下这道题的各种偏微分</p>
+<p><img src="https://i.loli.net/2021/03/19/LyF1Uj8rDKHdeEM.png" srcset="/img/loading.gif" alt="image-20210319205940767"></p>
+<h3 id="4、结果分析"><a href="#4、结果分析" class="headerlink" title="4、结果分析"></a>4、结果分析</h3><p>将算出的结果可视化之后得到</p>
+<p><img src="https://i.loli.net/2021/03/19/AWm1VfUE94ST7Po.png" srcset="/img/loading.gif" alt="image-20210319211827416"></p>
+<p>发现这个Function无法完全的符合我们data的点我们得出的Train Error是31.9，然后我们拿出测试集</p>
+<p><img src="https://i.loli.net/2021/03/19/9YZzf3gbd4WFraE.png" srcset="/img/loading.gif" alt="image-20210319212019084"></p>
+<p>得出的Test Error是35，这个结果是比较大的所以我们要考虑重新设计Function例如二次式子三次式四次式等</p>
+<p>二次式：</p>
+<p><img src="https://i.loli.net/2021/03/19/WyJLFtqAGI69HNr.png" srcset="/img/loading.gif" alt="image-20210319212259250"></p>
+<p>三次式：</p>
+<p><img src="https://i.loli.net/2021/03/19/RmprAZfMqTaiE3x.png" srcset="/img/loading.gif" alt="image-20210319212327252"></p>
+<p>四次式：</p>
+<p><img src="https://i.loli.net/2021/03/19/JP3qkpF2vgLDKiQ.png" srcset="/img/loading.gif" alt="image-20210319212413270">发现在Train里面的Error是减少了，但是Test里头的Error增加了</p>
+<p>当我们换成5次式：</p>
+<p><img src="https://i.loli.net/2021/03/19/p5AONzJiQ4TkBhD.png" srcset="/img/loading.gif" alt="image-20210319212529041"></p>
+<p>这个一眼就看出来不合理，但是在Train上面的Error依旧在降低，但是Test Error变得十分夸张的大，很明显这个模型式不可以用的</p>
+<p>所以这个model不是次数越高越好可能在Train的表现极佳但是实际使用是完全不行的</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Machine-Learing/">Machine Learing</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/16/Machine%20Learing/">
+                        <span class="hidden-mobile">Machine Learning的简介</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -3,5 +3,100 @@
   
   
   
+  <entry>
+    <title>Regression回归</title>
+    <link href="/2021/03/19/Regression%E5%9B%9E%E5%BD%92/"/>
+    <url>/2021/03/19/Regression%E5%9B%9E%E5%BD%92/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Regression-回归"><a href="#Regression-回归" class="headerlink" title="Regression 回归"></a>Regression 回归</h1><p>本Blog基于台湾大学李宏毅教授的课程</p><h2 id="一、Regression可以做什么"><a href="#一、Regression可以做什么" class="headerlink" title="一、Regression可以做什么"></a>一、Regression可以做什么</h2><ul><li><p>股票预测系统（输入过去的股票变动数据输出未来预测）</p></li><li><p>自动驾驶汽车（输入各种传感器数据输出方向盘变动角度）</p></li><li><p>推荐系统（输入浏览历史输出符合用户需求的物品）</p></li></ul><h2 id="二、Regression实例：宝可梦CP值预测"><a href="#二、Regression实例：宝可梦CP值预测" class="headerlink" title="二、Regression实例：宝可梦CP值预测"></a>二、Regression实例：宝可梦CP值预测</h2><h3 id="1-目标"><a href="#1-目标" class="headerlink" title="1.目标"></a>1.目标</h3><p>选择出适合进化的宝可梦，CP值指的是一个宝可梦的战斗力，在这个实例中输入为某一只宝可梦在进化前的CP值，输出为这只宝可梦进化之后的CP值。X表示输入，Y表式输出。</p><h3 id="2-寻找合适的Function-set（寻找模型）"><a href="#2-寻找合适的Function-set（寻找模型）" class="headerlink" title="2.寻找合适的Function set（寻找模型）"></a>2.寻找合适的Function set（寻找模型）</h3><p>y=b+w*xcp(w,b为任意参数)</p><p>因为b和w为任意值，所以这个model是一个无穷尽的一堆Function的集合，将此式转化为如图所示的样子：</p><p><img src="https://i.loli.net/2021/03/19/KQFV2Gw7PBvo6qA.png" alt="image-20210319195746244"></p><p>这个Xi指的是此题中的Feature,什么意思就是指会对结果产生影响的样本的特征，拿宝可梦CP预测这个来说，可能宝可梦的身高体重或者种族，都会对他进化过后的CP值产生影响，这些都叫做特征。Wi叫做weight就是这个Feature对结果产生影响的大小，Wi绝对值越大说明对应的Xi越是重要的Feature。</p><h3 id="3、判断Function的好坏"><a href="#3、判断Function的好坏" class="headerlink" title="3、判断Function的好坏"></a>3、判断Function的好坏</h3><p><img src="https://i.loli.net/2021/03/19/wq3FpLAiUtW4IZC.png" alt="image-20210319201011575"></p><p>将收集来的10个宝可梦的数据画成表格一个点代表一个宝可梦进化前后的CP值。</p><p>有了data我们就能够判断一个Function的好坏，我们再定义一个Loss Function（损失函数）这个Loss的输入就是一个Function输出就是这个Function有多不好坏，我们衡量Function的好坏实质上就是衡量两个参数w和b的好坏。</p><p><img src="https://i.loli.net/2021/03/19/7TMKPpXAioGWecY.png" alt="image-20210319202005898"></p><p>光看这个式子可能没有一个很直观的知道这个方差如何判断好坏，但是我们将这个式子几何表示画出来，会发现他是我们Data的点到我们Function这个线垂直方向的距离的平方，这个距离和越小说明Function总体上越靠近各个Data的点。</p><p>定完了Loss我们接下来要挑选最好的Function写作f<em>，也就是寻找最好的w和b写作w</em>和b*。我们引入Gradient Descent（梯度下降）的方法。我们现在的需求就变成了找w和b使得Loss最小。我们随便找一条线作为例子</p><p><img src="https://i.loli.net/2021/03/19/ZbPkg4TVt8CWmcG.png" alt="image-20210319203532530"></p><p> 我们对L求w的倒数，几何上就是求W0这个点切线的斜率，这个斜率的正负可以表示我这个点的趋势如果为正说明他在上升，我们要往回走一步，如果为负我们往回走一步，这个走一步该走多大取决于我们事前定好的一个值Learing rate（学习率）这个值大我们跨步就大学习速度就快，但是存在跨过头和来回跨步的情况。所以不是越大越好，然后我们这一步移动完了得到了w1，重复上面求导的操作得出w2，如此往复我们就能够的到导数最接近于0的点也就是wt（Local minima）但是我们发现实际上有比这个wt更低的点但是由于算法限制我们取不到那个Global minima。</p><p><img src="https://i.loli.net/2021/03/19/aFIXVjekv6bLtdJ.png" alt="image-20210319204303830"></p><p>但是我们宝可梦的这道题，他含有两个参数，实际上是一模一样的。我们求微分变成了求参数的偏微分如图所示参数更多的情况下也是如此：</p><p><img src="https://i.loli.net/2021/03/19/UBrVkoOlhbj6GQq.png" alt="image-20210319204551813"></p><p>我们将这个过程可视化一下</p><p><img src="https://i.loli.net/2021/03/19/eq9GMICgOtBEnJb.png" alt="image-20210319204658500"></p><p>可以看到每次变动都是走的点的法线方向逐渐从红色（Loss大的地方）往蓝色（Loss小的地方）移动但是如果你今天的图像长这个样子</p><p><img src="https://i.loli.net/2021/03/19/yZTJFdQPpYV7MAN.png" alt="image-20210319205530112"></p><p>就是要给大麻烦，他最好的结果取决于你初始的点是比较看人品的，但是在Liner regression这个问题中他是没有Local minima。</p><p>回到题目我们实际来算一下这道题的各种偏微分</p><p><img src="https://i.loli.net/2021/03/19/LyF1Uj8rDKHdeEM.png" alt="image-20210319205940767"></p><h3 id="4、结果分析"><a href="#4、结果分析" class="headerlink" title="4、结果分析"></a>4、结果分析</h3><p>将算出的结果可视化之后得到</p><p><img src="https://i.loli.net/2021/03/19/AWm1VfUE94ST7Po.png" alt="image-20210319211827416"></p><p>发现这个Function无法完全的符合我们data的点我们得出的Train Error是31.9，然后我们拿出测试集</p><p><img src="https://i.loli.net/2021/03/19/9YZzf3gbd4WFraE.png" alt="image-20210319212019084"></p><p>得出的Test Error是35，这个结果是比较大的所以我们要考虑重新设计Function例如二次式子三次式四次式等</p><p>二次式：</p><p><img src="https://i.loli.net/2021/03/19/WyJLFtqAGI69HNr.png" alt="image-20210319212259250"></p><p>三次式：</p><p><img src="https://i.loli.net/2021/03/19/RmprAZfMqTaiE3x.png" alt="image-20210319212327252"></p><p>四次式：</p><p><img src="https://i.loli.net/2021/03/19/JP3qkpF2vgLDKiQ.png" alt="image-20210319212413270">发现在Train里面的Error是减少了，但是Test里头的Error增加了</p><p>当我们换成5次式：</p><p><img src="https://i.loli.net/2021/03/19/p5AONzJiQ4TkBhD.png" alt="image-20210319212529041"></p><p>这个一眼就看出来不合理，但是在Train上面的Error依旧在降低，但是Test Error变得十分夸张的大，很明显这个模型式不可以用的</p><p>所以这个model不是次数越高越好可能在Train的表现极佳但是实际使用是完全不行的</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Machine Learing</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Machine Learning的简介</title>
+    <link href="/2021/03/16/Machine%20Learing/"/>
+    <url>/2021/03/16/Machine%20Learing/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Machine-Learing"><a href="#Machine-Learing" class="headerlink" title="Machine Learing"></a>Machine Learing</h1><p>此blog出于对社团新成员进行AI培训，想着系统化的教导新生然后看了港大的李宏毅教授的教学视频，根据教学视频提供的Learing Map来写的相当于教学大纲性质的blog</p><h2 id="一、-简介"><a href="#一、-简介" class="headerlink" title="一、 简介"></a>一、 简介</h2><p><img src="https://i.loli.net/2021/03/17/3rp5xnbdaNeXTgP.png" alt="image-20210317212049042"></p><p>人工智能是现在非常流行的技术，但具体定义是什么？如名字一样是一种让机器人像人一样思考学习变得和人一样聪明的方法。但是长久以来没有办法做到这点，直到1980年有人发明了机器学习的方法，机器学习是达成人工智能的方法而深度学习又是机器学习的一种方法。</p><p>AI不是通过大量的if else的堆砌来完成逻辑判断，而是写一个能够赋予机器人学习能力的程序，教他一些基础的内容，等他具备了基础的识别能力后，才能完成同类型内容的分辨。所以Machine Learing需要做的就是寻找一个Function（功能）来完成实际场景中的各类任务。</p><p>所以一个完整Machine Learning的Framework分为下面三个部分</p><ul><li><p>寻找一堆合理的Function</p></li><li><p>让机器衡量一个Function的好坏</p></li><li><p>挑出最好的一个Function</p><h2 id="二、Learning-Map"><a href="#二、Learning-Map" class="headerlink" title="二、Learning Map"></a>二、Learning Map</h2></li></ul><p><img src="https://i.loli.net/2021/03/17/Hm1uWfosTNcbOi6.png" alt="image-20210317214650464"></p><p>粉色（任务）    蓝色（学习情景）绿色（模型类别）</p><p>Regression(回归)指的是最后输出的是一个确切的值</p><p>Classification（分类）最后输出的是分类结果</p><ul><li><p>Binary Classionfication（二元分类）输出结果是YES OR NO         E.g：是否是垃圾邮件</p></li><li><p>Multi-class Classionfication(多类别分类) 输出类别是各种标签        E.g:新闻分类</p><p>分类方法也包含很多种例如：Linera Model（线性模型）Non-Linear Model（非线性模型），而在非线性模型中又包含了现在流行的Deep Leraing（深度学习）以及SVM（Support Vector Machine 支持向量机），decision tree（决策树）和K-NN（k-nearest neighborK近邻法）以上都属于有监督学习</p><p>有监督学习指的是我给模型输入的data是包含标准答案的，某些情况下数据集不够我们就需要引入Semi-supervised(半监督学习)，Transfer Learing(迁移学习)，unsupervised Learning（无监督学习）等方式即使在数据集相对缺乏的情况下（取决于具体任务情况）也能很好的生成泛化模型。</p><p>还有一类比较少听到的叫做Structured Learing（结构化学习）他的输出结果是一个复杂的有结构性的东西，例如语音对话输出的就是一个句子包含了字词语法。</p><p>还有一种技术叫做Reinforcement Learing（强化学习）最广为认知例子就是下围棋的那个AI阿尔法狗，在强化学习里面我们不告诉机器我给了什么你应该返回什么而是包含一个score（分数）他能够通过分数的高低完成自己模型的纠错。在阿尔法狗中当他完成了监督化学习能够根据棋谱来的出我的Next Step，但这种训练结果是不足以战胜棋力高超的大师们的，这时候就引入了强化学习，他自己和自己下棋通过最后的输赢结果，对自己的模型进行调整，这就是是强化学习他的实际应用。Learing From Agent（从评价中学习）这种情况就基本上接近于人类认知的构建过程，而却确实人类也是如此构建，例如在二十世纪八十年代中期提出的SDM模型被证实他的稀疏编码机制在人的视觉，听觉，嗅觉功能的脑皮层中广泛存在。所以我们在做Machine Learinmg的时候可能反过来对理解我们大脑，“人类如何学习”是一个有关自我本识的重大问题。从这个意义上来说机器学习不仅在信息科学中占有重要地位，还具有一定的自然科学探索色彩。</p></li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Machine Learing</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Docker的使用</title>
+    <link href="/2021/03/14/Docker%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <url>/2021/03/14/Docker%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Docker使用"><a href="#Docker使用" class="headerlink" title="Docker使用"></a>Docker使用</h1><h2 id="Docker介绍"><a href="#Docker介绍" class="headerlink" title="Docker介绍"></a>Docker介绍</h2><p>Docker 是一个用于开发，交付和运行应用程序的开放平台。Docker 使您能够将应用程序与基础架构分开，从而可以快速交付软件。借助 Docker，您可以与管理应用程序相同的方式来管理基础架构。通过利用 Docker 的方法来快速交付，测试和部署代码，您可以大大减少编写代码和在生产环境中运行代码之间的延迟。</p><p>Docker类似于虚拟机但是虚拟机是直接分配硬件资源在分配过去的硬件资源上建立一个完整的系统你再在这个系统上进行操作，而Docker是建立在系统层上方开辟一片空白的环境空间将各种资源分配给这个容器，由于他可以随意的将各种环境镜像pull下来，也可以将本地容器打包成镜像上传，相当于你不仅可以git push，将自己的源码上传还可以顺带将环境打包上去，省略了配置环境的步骤这是他的巨大优势。</p><p>但是他也有缺点比如说我运行了两个docker容器，两个容器要实现通信，就不能简单的按照正常方式来进行进行交流，需要在Docker层面上配置端口号实现不同容器间的通信</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>工具使用</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>WINDOWS配置Paddle环境</title>
+    <link href="/2021/03/09/WINDOWS%E9%85%8D%E7%BD%AEPaddle%E7%8E%AF%E5%A2%83/"/>
+    <url>/2021/03/09/WINDOWS%E9%85%8D%E7%BD%AEPaddle%E7%8E%AF%E5%A2%83/</url>
+    
+    <content type="html"><![CDATA[<h1 id="WINDOWS环境使用PIP安装PaddlePaddle"><a href="#WINDOWS环境使用PIP安装PaddlePaddle" class="headerlink" title="WINDOWS环境使用PIP安装PaddlePaddle"></a>WINDOWS环境使用PIP安装PaddlePaddle</h1><h2 id="注：所有安装路径都建议默认路径最好路径中无中文"><a href="#注：所有安装路径都建议默认路径最好路径中无中文" class="headerlink" title="注：所有安装路径都建议默认路径最好路径中无中文"></a>注：所有安装路径都建议默认路径最好路径中无中文</h2><h3 id="1-安装python"><a href="#1-安装python" class="headerlink" title="1.安装python"></a>1.安装python</h3><p>我一开始安装的是python3.8后来在使用安装paddlepaddle的指令时会报错，图如下</p><p><img src="https://i.loli.net/2021/03/09/W7PJhxLr1URNSEI.png" alt="avatar"></p><p>问了百度那边的人告诉我切换环境为3.7这里就改为安装python3.7了</p><p>下载地址</p><p><a href="https://www.python.org/downloads/release/python-378/">https://www.python.org/downloads/release/python-378/</a></p><p><img src="https://i.loli.net/2021/03/09/qPMgZSUkj7if9VW.png" alt="1_2"></p><p>选择executable installer</p><p>然后选择安装勾选add path然后install now</p><p>接下来更新库管理器pip（因为python安装默认是有pip的所以不用单独安装）</p><p>进入命令提示符输入</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">python -m pip install <span class="hljs-comment">--upgrade pip</span><br></code></pre></td></tr></table></figure><p>出现如图的successfully install pip<img src="https://i.loli.net/2021/03/09/98mFLCUZDt7SBuG.png" alt="1_3"></p><p>表示安装完成</p><h3 id="2-安装CUDA，CUDNN"><a href="#2-安装CUDA，CUDNN" class="headerlink" title="2.安装CUDA，CUDNN"></a>2.安装CUDA，CUDNN</h3><h4 id="安装CUDA"><a href="#安装CUDA" class="headerlink" title="安装CUDA"></a>安装CUDA</h4><p><a href="https://developer.nvidia.com/zh-cn/cuda-downloads">https://developer.nvidia.com/zh-cn/cuda-downloads</a></p><p><img src="https://i.loli.net/2021/03/09/AXGmSlCch2yokMV.png" alt="1_4"></p><p>选择本地安装</p><p>尝试切换网络环境挂梯子等方法还是无法下载然后找到个百度网板里头有CUDA11</p><p><a href="https://pan.baidu.com/s/1IV_lBCeFFM712xx_iXnhqQ#list/path=%2F">https://pan.baidu.com/s/1IV_lBCeFFM712xx_iXnhqQ#list/path=%2F</a></p><p>提取码：0pr5</p><p>下载完成后将压缩文件解压里面是安装要用到的动态库然后双击exe文件进行安装一路默认安装就行</p><p>Cudnn安装在验证安装的时候提示我CUDNN版本问题要求10.0版本</p><p><img src="https://i.loli.net/2021/03/09/t2WoKA49iEsPyIl.png" alt="1_5"></p><p><a href="https://developer.nvidia.com/cudnn">https://developer.nvidia.com/cudnn</a></p><p>点击下载cudnn访问后可能会有注册啥的按步骤注册完成</p><p>勾选I agree</p><p><img src="https://i.loli.net/2021/03/09/dXZ8wrlqg47Ch93.png" alt="1_6"></p><p>选择Archived cuDNN Releases</p><p><img src="https://i.loli.net/2021/03/09/MD6YQdvEOU38Guh.png" alt="1_7"></p><p>选择如图所示下载for windows下载（我挂了梯子才下下来）</p><p>然后将文件解压将解压文件夹中的cuda/bin目录下的dll文件复制黏贴到</p><p>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.1\bin这个路径下（CUDA安装目录）</p><h3 id="3-安装paddlepaddle"><a href="#3-安装paddlepaddle" class="headerlink" title="3.安装paddlepaddle"></a>3.安装paddlepaddle</h3><p>打开cmd输入</p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">python3</span> -m pip install paddlepaddle-gpu==<span class="hljs-number">2</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.post<span class="hljs-number">110</span> -f https://paddlepaddle.org.cn/whl/stable.html<br></code></pre></td></tr></table></figure><p>出现</p><p><img src="https://i.loli.net/2021/03/09/Yf4AFzMCjyUovl3.png" alt="1_8"></p><p>表示安装成功</p><p>接下来验证安装</p><p>在cmd中输入python进入释义器</p><p>输入</p><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-keyword">import</span> paddle<br></code></pre></td></tr></table></figure><p>再输入</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">paddle<span class="hljs-selector-class">.utils</span><span class="hljs-selector-class">.run_check</span>()<br></code></pre></td></tr></table></figure><p>出现PaddlePaddle is installed successfully !</p><p><img src="https://i.loli.net/2021/03/09/vpn43BN8OULoSt7.png" alt="1_9"></p><p>表示安装完成</p><p>参考文档：</p><p><a href="https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html">https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html</a></p><p><a href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html</a></p><p><a href="https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/2.0/install/pip/windows-pip.html">https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/2.0/install/pip/windows-pip.html</a></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>环境配置</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>PaddleOCR踩坑</title>
+    <link href="/2021/03/08/PaddleOCR%E8%B8%A9%E5%9D%91/"/>
+    <url>/2021/03/08/PaddleOCR%E8%B8%A9%E5%9D%91/</url>
+    
+    <content type="html"><![CDATA[<h1 id="PaddleOCR踩坑记录"><a href="#PaddleOCR踩坑记录" class="headerlink" title="PaddleOCR踩坑记录"></a>PaddleOCR踩坑记录</h1><h2 id="环境方面："><a href="#环境方面：" class="headerlink" title="环境方面："></a>环境方面：</h2><ul><li><p>下载完Paddle后运行check程序显示</p><p>解决方法：</p></li><li><p>部署预测文件出现报错length</p><p>解决方案：路径错误</p></li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>工具使用</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
   
 </search>
