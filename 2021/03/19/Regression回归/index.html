@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      2.1k 字
     </span>
   
 
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      22
        分钟
     </span>
   
@@ -277,6 +277,42 @@
 <p><img src="https://i.loli.net/2021/03/19/p5AONzJiQ4TkBhD.png" srcset="/img/loading.gif" alt="image-20210319212529041"></p>
 <p>这个一眼就看出来不合理，但是在Train上面的Error依旧在降低，但是Test Error变得十分夸张的大，很明显这个模型式不可以用的</p>
 <p>所以这个model不是次数越高越好可能在Train的表现极佳但是实际使用是完全不行的</p>
+<p>我们将train的Loss和test的Loss画到同一张图上</p>
+<p><img src="https://i.loli.net/2021/03/20/EaT2VdsMCtFz5cP.png" srcset="/img/loading.gif" alt="image-20210320092116908"></p>
+<p>从红线后面的部分在train上是继续走低，但在test上误差变得特别大，这种现象叫做Overfitting（过拟合）所以实际上对于这个题来说三次式是最好的选择。</p>
+<h3 id="5、收集更多的Data"><a href="#5、收集更多的Data" class="headerlink" title="5、收集更多的Data"></a>5、收集更多的Data</h3><p>我们在收集了更多的data之后发现之前的是白忙活一场，因为从图像上很容易就能判断出我的三次式是不能够很好的满足这个Data分布的</p>
+<p><img src="https://i.loli.net/2021/03/20/lnRLh3qyuVT9mFC.png" srcset="/img/loading.gif" alt="image-20210320092810583"></p>
+<p>说明进化后的CP值还和别的因素有重大关系，就是宝可梦的种族。</p>
+<p>我们回到开始的Function的设置。相当于在Function前面加上一个对其种族的判断</p>
+<p><img src="https://i.loli.net/2021/03/20/cwJd8p6SzR9AuIt.png" srcset="/img/loading.gif" alt="image-20210320093311239"></p>
+<p>我们把含有If的式子写成一个新的Liner Model</p>
+<p><img src="https://i.loli.net/2021/03/20/XYbxZMeV5v3gSWI.png" srcset="/img/loading.gif" alt="image-20210320093814442"></p>
+<p>其中的数学符号就是将判断化成了一个数学式在判断之后又变成了</p>
+<p>一个线性Function y=bx+wx*xcp</p>
+<p>我们重新进行Function的选择之后得出如下结论</p>
+<p><img src="https://i.loli.net/2021/03/20/GQ8WXnkUFJiq6TO.png" srcset="/img/loading.gif" alt="image-20210320093944639"></p>
+<p>发现两种error比之前都要下降不少，说明宝可梦的种族是个很重要的影响因素也就是一个重要的Feature，这也是机器学习的弊端，需要人为的去完成Function的设计那是否还有别的Feature对结果产生影响呢？身高体重生命值？</p>
+<p><img src="https://i.loli.net/2021/03/20/VY2soqNgf6AxIju.png" srcset="/img/loading.gif" alt="image-20210320094418631"></p>
+<h3 id="6、回到第一步的涉及Function上"><a href="#6、回到第一步的涉及Function上" class="headerlink" title="6、回到第一步的涉及Function上"></a>6、回到第一步的涉及Function上</h3><p>我们回到第一步再重新设计Function我们写一个最复杂的Function把我们所有的数值塞进去</p>
+<p><img src="https://i.loli.net/2021/03/20/DwUYe9BuW2a6bqi.png" srcset="/img/loading.gif" alt="image-20210320095106061"></p>
+<p>训练结果非常理想只有1.9的Loss，但是测试结果显示他是明显Overfitting的这种可能性很大，因为你的模型足够复杂的情况下是很容易Overfitting的。那么怎么办呢，我们引入Regularization（正则化）</p>
+<h3 id="7、正则化"><a href="#7、正则化" class="headerlink" title="7、正则化"></a>7、正则化</h3><p><img src="https://i.loli.net/2021/03/20/apPjC2gwsLSAmcr.png" srcset="/img/loading.gif" alt="image-20210320095631965"></p>
+<p>我们在原来的Function后面加入一个新的东wi的平方和这个hi什么意思，就是我们要求的W值他越小越好，如何理解越小越好。把他几何化这个越小说明我的曲线是越平滑的因为他的变化小，我们加上了这个目的就让W对x的变化不敏感，因为数据中存在着某种坏点，我们使用正则化能够将坏点对整体产生的影响降低，这是很有必要的事情，因为我们需要的是一个泛化的模型，对于各种坏点我们最好是不要理会，因为在实际的使用中坏点情况是我们不需要考虑的，他在整个实际情况中也是只占一小部分，我们要降低他对整体的影响这就是正则表达式的作用。换句话说就是让我们的Output对Input不敏感。我们将正则表达式前面的系数不断进行修改得出如图结果</p>
+<p><img src="https://i.loli.net/2021/03/20/EmnUpxL9KIT7Bah.png" srcset="/img/loading.gif" alt="image-20210320101514599"></p>
+<p>发现在取100的时候是最好的继续往上发现他也不行的，我们虽然需要一个光滑的曲线但是不能过于光滑过于光滑会导致我的Input不能够很好的对模型产生影响修改w和b这也是我们不想看到的</p>
+<h2 id="三、课程总结"><a href="#三、课程总结" class="headerlink" title="三、课程总结"></a>三、课程总结</h2><p><img src="https://i.loli.net/2021/03/20/YGVhDBjOqeUSg9K.png" srcset="/img/loading.gif" alt="image-20210320102403500"></p>
+<p>这张图是李宏毅老师做的总结</p>
+<p>然后我这边对于各种概念和技术做一下总结：</p>
+<p>首先我们做一个任务分为三步：</p>
+<ul>
+<li><p>确定模型</p>
+</li>
+<li><p>判断Function的好坏</p>
+</li>
+<li><p>找出最好的Function</p>
+<p>确定模型中我们可以通过增加次数增加可能的Feature以及</p>
+</li>
+</ul>
 
             </div>
             <hr>
