@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.1k 字
+      2.4k 字
     </span>
   
 
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      22
+      25
        分钟
     </span>
   
@@ -310,8 +310,10 @@
 <li><p>判断Function的好坏</p>
 </li>
 <li><p>找出最好的Function</p>
-<p>确定模型中我们可以通过增加次数增加可能的Feature以及</p>
-</li>
+<p>在第一步确定模型中我们可以通过增加次数和增加可能的Feature来使得我们的Train error降低但是这两种方法都不是万能的，它存在一个过拟合的问题不是越多越好，通过增加可以降低train error但是有可能过了某一个值之后会让我们的model在test data上表现得很差，而Feature的寻找又是关于任务所需求领域的知识有关，是不很容易能够找到的。</p>
+<p>在第二步判断Funcion中我们除了知道了如何计算一个Function的好坏，如何将Function中的参数朝着我们需要的地方靠拢，也知道了通过正则化来降低坏点对于我们model训练的影响。这些是各位要牢记的。</p>
+<p>最后一步找出组好的Function往往是对结果的一个总结，如果结果的Loss过大或者说实际使用的Error很高，那么我们应该根据结果返回去修改Function的设置，修改Loss的计算方式以及之后会提到的各种优化方案。这最后一步相当于是对你模型的评估以及如何继续优化的一个思考。</p>
+<h2 id="OVER"><a href="#OVER" class="headerlink" title="OVER"></a>OVER</h2></li>
 </ul>
 
             </div>
