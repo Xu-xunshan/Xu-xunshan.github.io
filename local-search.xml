@@ -4,13 +4,32 @@
   
   
   <entry>
-    <title>误差从何而来</title>
-    <link href="/2021/03/21/%E8%AF%AF%E5%B7%AE%E4%BB%8E%E4%BD%95%E8%80%8C%E6%9D%A5/"/>
-    <url>/2021/03/21/%E8%AF%AF%E5%B7%AE%E4%BB%8E%E4%BD%95%E8%80%8C%E6%9D%A5/</url>
+    <title>关于服包A18赛题对PaddleOCR.infer代码进行的修改</title>
+    <link href="/2021/03/23/%E5%85%B3%E4%BA%8E%E6%9C%8D%E5%8C%85A18%E8%B5%9B%E9%A2%98%E5%AF%B9PaddleOCR-infer%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E7%9A%84%E4%BF%AE%E6%94%B9/"/>
+    <url>/2021/03/23/%E5%85%B3%E4%BA%8E%E6%9C%8D%E5%8C%85A18%E8%B5%9B%E9%A2%98%E5%AF%B9PaddleOCR-infer%E4%BB%A3%E7%A0%81%E8%BF%9B%E8%A1%8C%E7%9A%84%E4%BF%AE%E6%94%B9/</url>
     
     <content type="html"><![CDATA[]]></content>
     
     
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>误差从何而来</title>
+    <link href="/2021/03/21/%E8%AF%AF%E5%B7%AE%E4%BB%8E%E4%BD%95%E8%80%8C%E6%9D%A5/"/>
+    <url>/2021/03/21/%E8%AF%AF%E5%B7%AE%E4%BB%8E%E4%BD%95%E8%80%8C%E6%9D%A5/</url>
+    
+    <content type="html"><![CDATA[<h1 id="误差从何而来"><a href="#误差从何而来" class="headerlink" title="误差从何而来"></a>误差从何而来</h1><p>我们根据上节课的内容可以做一个小总结，就是我们寻找最好的那个Function就是希望他的Error更小，这时候我们就要分析Error的来源有哪些，这节课会介绍两个Error的来源一个是Variance（变化幅度）一个是Bias（偏向）并且分别讲解了如何降低这两种Error。</p><h2 id="一、回顾与概念引入"><a href="#一、回顾与概念引入" class="headerlink" title="一、回顾与概念引入"></a>一、回顾与概念引入</h2><p>第一次可我们将CP值从一次到五次分别进行了计算发现随着次数的增加他的Error在Train data上的表现是逐步降低的，但是在Test data上面的表现从第四次起就明显错误了，当我们不知道这个Error来源于哪里的，无法精准的降低Error。除非你具有专业领域知识能够一针见血的设计出准确的Feature。那我们就要分析这个误差的来源。</p><p><img src="https://i.loli.net/2021/03/25/pFN2EzJMblZTdWj.png" alt="image-20210325152047866"></p><p>在正式分析误差来源前我们引入几个概念</p><p>假设存在一个f^这是个适用于所有情况的Function也就是我们的最终目标，我们把他当作一个靶子的靶心。而我们求出来的f*距离靶心是存在一定距离的，这个距离由两部分组成一个就是Variance另一部分就是Bias但是我们光从图上无法判断这个Error的哪部分是Variance哪部分是Bias。这个靶子的模型将会贯穿接下来的内容。</p><h2 id="二、Variance-and-Bias"><a href="#二、Variance-and-Bias" class="headerlink" title="二、Variance and Bias"></a>二、Variance and Bias</h2><h3 id="Variance"><a href="#Variance" class="headerlink" title="Variance"></a>Variance</h3><p>现在比如说我要找一个u，这个u的值我是不知道的，但是我随即取一堆的x，我把这堆x求一个平均值m这个m肯定不等于u，除非我这个x是取了无穷多个。第一次求出来是m1，第二次是m2，以此类推最后我再把所有m再求一个平均值E（m），那么这个E（m）是比起所有的m都更加接近u的，这种就是nobias（无偏差）的概念，拿前面的靶子距离，相当于我瞄准了f^但是由于我的枪有各种小问题，导致我不能百发百中但是由于我瞄准的是正确的地方，他的弹孔就分布在靶心附近所以我的打靶成绩也不会太差。</p><p><img src="https://i.loli.net/2021/03/25/DyYWQuaLfxFJv8i.png" alt="image-20210325154317436"></p><p>那么我们这个弹孔分的有多开，返回上面的就是我的m的取值有多散，是一个值Var（m），那这个值的大小又取决于我算了多少次m，即我开了多少次枪，随着次数的增加我的Var（m）是逐渐减小的。如图所示的我取的N越多那么这个分布越集中也就是Var（m）越小</p><p><img src="https://i.loli.net/2021/03/25/fkQ4KptcO2uTJoU.png" alt="image-20210325154400099"></p><p>那么如何估测Variance也就是σ^2呢？我们还是通过找m然后通过下图式子求出s^2，s^2随着N的增加也就是取m次数的增加而更加接近σ^2。</p><p><img src="https://i.loli.net/2021/03/25/IDGumLNvhPgcFje.png" alt="image-20210325204555347"></p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Machine Learning</tag>
+      
+    </tags>
     
   </entry>
   
