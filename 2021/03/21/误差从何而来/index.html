@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      740 字
+      1.4k 字
     </span>
   
 
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      15
        分钟
     </span>
   
@@ -241,6 +241,36 @@
 <p><img src="https://i.loli.net/2021/03/25/fkQ4KptcO2uTJoU.png" srcset="/img/loading.gif" alt="image-20210325154400099"></p>
 <p>那么如何估测Variance也就是σ^2呢？我们还是通过找m然后通过下图式子求出s^2，s^2随着N的增加也就是取m次数的增加而更加接近σ^2。</p>
 <p><img src="https://i.loli.net/2021/03/25/IDGumLNvhPgcFje.png" srcset="/img/loading.gif" alt="image-20210325204555347"></p>
+<p>回到我们回归的这个靶子上来，误差的组成就分为如下的四种靶子</p>
+<p><img src="https://i.loli.net/2021/03/28/tKguaYCwFV71eM2.png" srcset="/img/loading.gif" alt="image-20210328143641820"></p>
+<p>我们最终的目标就是希望f的平均值就和我们最好的f*是一致的实际上无论是Low Variance还是High Variance都能找到不错的f平均</p>
+<p>那我们接下来就是做出很多条f来救出f平均</p>
+<p><img src="https://i.loli.net/2021/03/28/xpjBTY4RbMaCVd9.png" srcset="/img/loading.gif" alt="image-20210328144104894"></p>
+<p>那我们再把这几张图做个对比当我们使用一个较为简单的模型时，这个线是非常聚合的换句话说就是他的Variance是较小的，再来看一下五次式，他的曲线在同一个x处的取值差距是非常大的也就是Variance很大。换成我们的靶子理论就长下面这样</p>
+<p><img src="https://i.loli.net/2021/03/28/ifDm1W5EoCKa4rS.png" srcset="/img/loading.gif" alt="image-20210328144532119"></p>
+<p>接着我们看Bias其实这个值才是我们寻找一个好模型的关键。因为在分的不是很开的情况下，我的取值够多我的平均值是很靠近靶心的不像Variance就算我再小Bias大的情况下也是找不准的。我们先假设一次式中最好的模型是f^</p>
+<p><img src="https://i.loli.net/2021/03/28/RK7MBnDZuap2el6.png" srcset="/img/loading.gif" alt="image-20210328145313448"></p>
+<p>我们对几个式子以此取平均画在图上</p>
+<p><img src="https://i.loli.net/2021/03/28/1nsHmISW4kvFX6G.png" srcset="/img/loading.gif" alt="image-20210328145420760"></p>
+<p>这时候发现之前被我们嫌弃的五次式反而是最靠近那个f^的分析一下一次式和五次式我们发现</p>
+<p><img src="https://i.loli.net/2021/03/28/AhpXY6QHfwmoFIV.png" srcset="/img/loading.gif" alt="image-20210328151402529"></p>
+<p>我们重新分析一下这几个式子之前提到过我们想要的是一个Bias很小，Variance不是很大的一堆式子这样子我们才能够找接近f^的f平均。我们第一节课的几个式子把他的Error分析一下画出如下图</p>
+<p><img src="https://i.loli.net/2021/03/28/zme1OurGYhKjTbk.png" srcset="/img/loading.gif" alt="image-20210328194208410"></p>
+<p>所以第一节课提到的Underfitting（欠拟合）和Overfitting（过拟合）就是一个Bias大一个Variance大，换句话说当你的模型不能够使得Train Error较小就是Bias的问题，当你的模型在Train Data上的表现比较好，但是他的Test Error比较大的时候，Error的来源就是Virance。</p>
+<p>如果Error的来源是Bias，那么我们应该去重新设计我们的mode，l有两种方法：</p>
+<ul>
+<li>增加更多的特征作为输入（例如宝可梦中的种族身高体重）</li>
+<li>选择一个更复杂的model（将一次式改为五次式）</li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/28/5DLBTkbod7GSpP2.png" srcset="/img/loading.gif" alt="image-20210328194854106"></p>
+<p>如果Error的来源是Variance，我们也有两种处理方式：</p>
+<ul>
+<li>增加Train data</li>
+<li>使用正则化</li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/28/wTDJhMUldWogiRa.png" srcset="/img/loading.gif" alt="image-20210328195146523"></p>
+<p>之后的内容在我个人来看讲的并不是非常的好，我更偏向于周志华老师在机器学习一书中，第二章评估方法中的2.2.2节交叉验证法的讲解方法。李宏毅老师将这种验证法具体化了但是理解起来没有书中写的清晰。下面截图为机器学习一书中的讲解。</p>
+<p><img src="https://i.loli.net/2021/03/29/V1tRuPAg8OwN5bD.jpg" srcset="/img/loading.gif" alt="IMG_0137(20210329-212421)"></p>
 
             </div>
             <hr>
