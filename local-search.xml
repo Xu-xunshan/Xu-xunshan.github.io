@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>梯度下降</title>
+    <link href="/2021/04/06/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/"/>
+    <url>/2021/04/06/%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D/</url>
+    
+    <content type="html"><![CDATA[<h1 id="梯度下降Gradient-Descent"><a href="#梯度下降Gradient-Descent" class="headerlink" title="梯度下降Gradient Descent"></a>梯度下降Gradient Descent</h1><h2 id="一、回顾及概念引入"><a href="#一、回顾及概念引入" class="headerlink" title="一、回顾及概念引入"></a>一、回顾及概念引入</h2><p>之前提到的三步走中的第三步需要我们寻找最好的function，通过Loss Function来判断参数的好坏，然后对Loss Function进行偏微分，将偏微分结果×学习率来得出下一次参数的值。这个向量就叫做梯度</p><p><img src="https://i.loli.net/2021/04/06/jLBucNiOfltChVU.png" alt="image-20210406162412974"></p><p>将上面提到的梯度下降可视化就是下图</p><p><img src="C:\Users\xunshanxu\AppData\Roaming\Typora\typora-user-images\image-20210414225149964.png" alt="image-20210414225149964"></p><p>红色箭头为Gradient蓝色的箭头为计算后的Θn计算方式如上文所提。</p><p>接下来是梯度下降中的一些小贴士Tips</p><p>Tip1：学习率调整</p><p>此问题在回归中提到过，离local minina远的时候学习率小那么迭代速度很慢，离他近的时候如果学习率大会导致他在最低点两边来回跳，同时不能继续降低loss。对两种情况的的Loss可视化一下</p><p><img src="https://i.loli.net/2021/04/14/6hvLwRx4NmpDe2n.png" alt="image-20210414230201919"></p><p>我们发现无论是过大还是过小都不能很好的降低Loss，如此我们引入一个概念叫做Adaptive Learning Rates（自适应学习率）我们在训练开始很大概率是距离最低点比较远的情况，所以我们希望它能够很快的接近最低点，随着训练论数的增加</p>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>Machine Learning</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>cp 预测</title>
     <link href="/2021/03/27/cp-%E9%A2%84%E6%B5%8B/"/>
     <url>/2021/03/27/cp-%E9%A2%84%E6%B5%8B/</url>
