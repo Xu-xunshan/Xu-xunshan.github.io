@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      1.6k 字
     </span>
   
 
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15
+      16
        分钟
     </span>
   
@@ -256,8 +256,11 @@
 <p><img src="https://i.loli.net/2021/04/15/fP6qoO8XG1UTzQR.png" srcset="/img/loading.gif" alt="image-20210415151915773"></p>
 <h2 id="四、Stochastic-Gradient-Descent（随机梯度下降）"><a href="#四、Stochastic-Gradient-Descent（随机梯度下降）" class="headerlink" title="四、Stochastic  Gradient Descent（随机梯度下降）"></a>四、Stochastic  Gradient Descent（随机梯度下降）</h2><p>随机梯度下降的思路和之前的不太一样，我们之前定义Loss的函数是求出每个example的均方误差并且将他全部加起来，我们这里不是推翻之前的Loss的写法，他完全没有问题，只不过提供另一种思路，我们每次选择一个example我的Loss只考虑一个example求出这个的均方误差，我们更新的时候也只考虑根据这一个值来更新。好像这么看来这是一个极其不稳定的方法，十分的莽撞，但其实他是有一定的好处的。</p>
 <p><img src="https://i.loli.net/2021/04/15/pCOy7ha2MfcArng.png" srcset="/img/loading.gif" alt="image-20210415154653688"></p>
-<p>我们实际操作一下并将结果可视化同样经行20次，我用之前的Loss可以看到他在稳定的靠近</p>
+<p>我们实际操作一下并将结果可视化同样经行20次，我用之前的Loss可以看到他在稳定的靠近local minina但是对比随机梯度下降，他靠近的速度是远远不如的</p>
 <p><img src="https://i.loli.net/2021/04/15/KYxjzlG1V59vph6.png" srcset="/img/loading.gif" alt="image-20210415154838950"></p>
+<h2 id="五、Feature-Scaling（特征缩放）"><a href="#五、Feature-Scaling（特征缩放）" class="headerlink" title="五、Feature Scaling（特征缩放）"></a>五、Feature Scaling（特征缩放）</h2><p>将特征的规模缩放到一致的程度，例如在regression中存在w1和w2两个参数他们的分布规模并不一致这时候我们最好将他统一</p>
+<p><img src="https://i.loli.net/2021/04/16/ATtwEG4uxjB2yqi.png" srcset="/img/loading.gif" alt="image-20210416111209395"></p>
+<p>解释一下这么做的目的</p>
 
             </div>
             <hr>
